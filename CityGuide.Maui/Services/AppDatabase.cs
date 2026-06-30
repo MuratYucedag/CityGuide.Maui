@@ -1,0 +1,98 @@
+﻿using CityGuide.Maui.Models;
+using SQLite;
+namespace CityGuide.Maui.Services
+{
+    public class AppDatabase
+    {
+        private SQLiteAsyncConnection _database;
+        private async Task InitAsync()
+        {
+            if (_database is not null)
+                return;
+
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "cityguide.db");
+
+            // Dosyanın tam yolunu görelim (SQLite Browser'da açmak için)
+            System.Diagnostics.Debug.WriteLine($"[DB PATH] {dbPath}");
+
+            _database = new SQLiteAsyncConnection(dbPath);
+
+            // Code-first: modellere bakıp tabloları oluştur (yoksa)
+            await _database.CreateTableAsync<Category>();
+            await _database.CreateTableAsync<Event>();
+            await _database.CreateTableAsync<User>();
+        }
+
+        // --- Okuma metotları ---
+
+        public async Task<List<Category>> GetCategoriesAsync()
+        {
+            await InitAsync();
+            return await _database.Table<Category>().ToListAsync();
+        }
+
+        public async Task<List<Event>> GetEventsAsync()
+        {
+            await InitAsync();
+            return await _database.Table<Event>().ToListAsync();
+        }
+
+        // Etkinlikleri çeker VE her birinin kategori adını doldurur (foreign key eşleştirme)
+        public async Task<List<Event>> GetEventsWithCategoryAsync()
+        {
+            await InitAsync();
+
+            // İki tabloyu da çek
+            var events = await _database.Table<Event>().ToListAsync();
+            var categories = await _database.Table<Category>().ToListAsync();
+
+            // Her etkinlik için, CategoryId'sine uyan kategoriyi bul ve adını yaz
+            foreach (var ev in events)
+            {
+                var matchingCategory = categories.FirstOrDefault(c => c.Id == ev.CategoryId);
+                if (matchingCategory is not null)
+                {
+                    ev.CategoryName = matchingCategory.CategoryName;
+                }
+                else
+                {
+                    ev.CategoryName = "Bilinmeyen";
+                }
+            }
+
+            return events;
+        }
+
+        // --- Yazma metotları (uygulama içinden eklemek istersen) ---
+
+        public async Task<int> AddCategoryAsync(Category category)
+        {
+            await InitAsync();
+            return await _database.InsertAsync(category);
+        }
+
+        public async Task<int> AddEventAsync(Event newEvent)
+        {
+            await InitAsync();
+            return await _database.InsertAsync(newEvent);
+        }
+
+        // --- Kullanıcı metotları ---
+
+        // Yeni kullanıcı ekler. E-posta zaten varsa [Unique] yüzünden hata fırlatır.
+        public async Task<int> AddUserAsync(User user)
+        {
+            await InitAsync();
+            return await _database.InsertAsync(user);
+        }
+
+        // E-postaya göre kullanıcı arar. Bulamazsa null döner.
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            await InitAsync();
+            return await _database.Table<User>()
+                                  .Where(u => u.Email == email)
+                                  .FirstOrDefaultAsync();
+        }
+    }
+}
