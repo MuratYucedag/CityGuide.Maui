@@ -66,6 +66,6 @@ public partial class LoginPage : ContentPage
 
     private async void OnRequestAccessTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Eriþim Talep Et", "Kayýt ekraný yakýnda baðlanacak.", "Tamam");
+        await Shell.Current.GoToAsync("//register");
     }
 }

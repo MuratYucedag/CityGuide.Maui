@@ -9,12 +9,9 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            var window = new Window(new Views.LoginPage());
-
-            // Telefon boyutuna yakın bir pencere (iPhone 15 ~ 393x852)
+            var window = new Window(new AppShell());
             window.Width = 393;
             window.Height = 652;
-
             return window;
         }
     }
