@@ -5,19 +5,28 @@
        x:Class="CityGuide.Maui.AppShell"
        FlyoutBehavior="Disabled">
 
-    <!-- Splash (başlangıç) -->
     <ShellContent Route="splash"
                   ContentTemplate="{DataTemplate views:SplashPage}"
                   Shell.NavBarIsVisible="False" />
 
-    <!-- Login -->
     <ShellContent Route="login"
                   ContentTemplate="{DataTemplate views:LoginPage}"
                   Shell.NavBarIsVisible="False" />
 
-    <!-- Register -->
     <ShellContent Route="register"
                   ContentTemplate="{DataTemplate views:RegisterPage}"
+                  Shell.NavBarIsVisible="False" />
+
+    <ShellContent Route="home"
+                  ContentTemplate="{DataTemplate views:HomePage}"
+                  Shell.NavBarIsVisible="False" />
+
+    <ShellContent Route="discover"
+                  ContentTemplate="{DataTemplate views:FavoritesPage}"
+                  Shell.NavBarIsVisible="False" />
+
+    <ShellContent Route="events"
+                  ContentTemplate="{DataTemplate views:SpecialEventsPage}"
                   Shell.NavBarIsVisible="False" />
 
 </Shell>

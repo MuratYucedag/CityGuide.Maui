@@ -1,4 +1,4 @@
-using CityGuide.Maui.Models;
+ï»¿using CityGuide.Maui.Models;
 using CityGuide.Maui.Services;
 
 namespace CityGuide.Maui.Views;
@@ -15,16 +15,16 @@ public partial class LoginPage : ContentPage
     {
         PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
 
-        // Göz ikonunu duruma göre deðiþtir
+        // GÃ¶z ikonunu duruma gÃ¶re deÄŸiÅŸtir
         if (PasswordEntry.IsPassword)
-            PasswordToggleIcon.Text = "\ue8f4";   // visibility (göz açýk)
+            PasswordToggleIcon.Text = "\ue8f4";   // visibility (gÃ¶z aÃ§Ä±k)
         else
-            PasswordToggleIcon.Text = "\ue8f5";   // visibility_off (göz çizgili)
+            PasswordToggleIcon.Text = "\ue8f5";   // visibility_off (gÃ¶z Ã§izgili)
     }
 
     private async void OnForgotPasswordTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Þifremi Unuttum", "Þifre sýfýrlama yakýnda eklenecek.", "Tamam");
+        await DisplayAlert("Åžifremi Unuttum", "Åžifre sÄ±fÄ±rlama yakÄ±nda eklenecek.", "Tamam");
     }
 
     private async void OnLoginClicked(object sender, EventArgs e)
@@ -33,35 +33,37 @@ public partial class LoginPage : ContentPage
         string email = EmailEntry.Text;
         string password = PasswordEntry.Text;
 
-        // 2) Boþ alan kontrolü
+        // 2) BoÅŸ alan kontrolÃ¼
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
         {
-            await DisplayAlert("Eksik Bilgi", "Lütfen e-posta ve þifrenizi girin.", "Tamam");
+            await DisplayAlert("Eksik Bilgi", "LÃ¼tfen e-posta ve ÅŸifrenizi girin.", "Tamam");
             return;
         }
 
-        // 3) Veritabanýndan bu e-postaya sahip kullanýcýyý bul
+        // 3) VeritabanÄ±ndan bu e-postaya sahip kullanÄ±cÄ±yÄ± bul
         User? user = await _db.GetUserByEmailAsync(email);
 
-        // 4) Kullanýcý yok mu, ya da þifre eþleþmiyor mu?
+        // 4) KullanÄ±cÄ± yok mu, ya da ÅŸifre eÅŸleÅŸmiyor mu?
         if (user is null || user.Password != password)
         {
-            await DisplayAlert("Giriþ Baþarýsýz", "E-posta veya þifre hatalý.", "Tamam");
+            await DisplayAlert("GiriÅŸ BaÅŸarÄ±sÄ±z", "E-posta veya ÅŸifre hatalÄ±.", "Tamam");
             return;
         }
 
-        // 5) Baþarýlý giriþ
-        await DisplayAlert("Hoþ Geldiniz", $"Giriþ baþarýlý! Merhaba, {user.FullName}.", "Tamam");
+        // 5) BaÅŸarÄ±lÄ± giriÅŸ
+        await Shell.Current.GoToAsync("//home");
+
+
     }
 
     private async void OnGoogleTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Google", "Google ile giriþ yakýnda eklenecek.", "Tamam");
+        await DisplayAlert("Google", "Google ile giriÅŸ yakÄ±nda eklenecek.", "Tamam");
     }
 
     private async void OnAppleTapped(object sender, TappedEventArgs e)
     {
-        await DisplayAlert("Apple", "Apple ile giriþ yakýnda eklenecek.", "Tamam");
+        await DisplayAlert("Apple", "Apple ile giriÅŸ yakÄ±nda eklenecek.", "Tamam");
     }
 
     private async void OnRequestAccessTapped(object sender, TappedEventArgs e)
