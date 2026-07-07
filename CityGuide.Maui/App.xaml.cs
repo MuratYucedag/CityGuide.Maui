@@ -11,7 +11,7 @@ namespace CityGuide.Maui
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            var window = new Window(new SplashPage());
+            var window = new Window(new Views.TransportationPage());
             window.Width = 393;
             window.Height = 652;
             return window;

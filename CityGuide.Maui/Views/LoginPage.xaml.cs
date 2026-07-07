@@ -51,6 +51,9 @@ public partial class LoginPage : ContentPage
         }
 
         // 5) Başarılı giriş
+        CurrentSession.UserId = user.Id;
+        CurrentSession.FullName = user.FullName;
+        CurrentSession.Email = user.Email;
         await Shell.Current.GoToAsync("//home");
 
 

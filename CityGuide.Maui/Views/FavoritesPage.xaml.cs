@@ -17,7 +17,10 @@ public partial class FavoritesPage : ContentPage
     }
     private readonly AppDatabase _db = new AppDatabase();
     // Þimdilik sabit kullanýcý (oturum yönetimi sonra gelecek)
-    private const int CurrentUserId = 1;
+    //private const int CurrentUserId = 1;
+
+    private int CurrentUserId => CurrentSession.UserId;
+
     // Tüm mekanlarý bellekte tut (filtreleme için)
     private List<Place> _allPlaces = new List<Place>();
     private string _selectedCategory = "Tümü";

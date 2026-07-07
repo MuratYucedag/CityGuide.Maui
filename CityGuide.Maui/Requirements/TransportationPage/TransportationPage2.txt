@@ -1,3 +1,14 @@
+﻿INSERT INTO TransportLines (Type, LineCode, LineName, Route, Status, ColorHex) VALUES
+('Metro', 'M1', 'KIRMIZI HAT', 'Sesto F.S. — Rho Fiera', 'Normal Servis', '#E31E24'),
+('Metro', 'M2', 'YEŞİL HAT', 'Assago/Abbiat. — Gessate', 'Normal Servis', '#009246'),
+('Metro', 'M3', 'SARI HAT', 'San Donato — Comasina', 'Normal Servis', '#FECB00'),
+('Metro', 'M4', 'MAVİ HAT', 'Linate Aeroporto — San Babila', 'Normal Servis', '#0054A6'),
+('Metro', 'M5', 'LEYLAK HAT', 'Bignami — San Siro Stadio', 'Normal Servis', '#B26AB1'),
+('Tramvay', 'Tram 1', 'Tarihi Tramvay Hattı 1', 'Piazza della Scala ve Barış Takı''ndan geçen en manzaralı güzergah.', 'Normal Servis', '#00796B'),
+('Otobüs', '90/91', '90/91 Troleybüs Hattı', 'Şehrin dış çemberini birbirine bağlayan 24 saat hizmet.', 'Normal Servis', '#455A64');
+
+-------------------------------------------------------------
+
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -30,7 +41,7 @@
             </Border>
 
             <Label Grid.Column="1"
-                   Text="Milano Şehir Rehberi"
+                   Text="Milano City Guide"
                    FontFamily="HankenBold"
                    FontSize="20"
                    TextColor="#0D47A1"
@@ -311,7 +322,7 @@
                                            CharacterSpacing="1"
                                            VerticalOptions="Center" />
                                     <Label Grid.Column="1"
-                                           Text="€15,00"
+                                           Text="€13,00"
                                            FontFamily="HankenBold"
                                            FontSize="16"
                                            TextColor="#0D47A1"
@@ -345,7 +356,6 @@
                                 </HorizontalStackLayout>
 
                                 <Button Text="Bilet Al"
-                                        Clicked="OnBuyTicketClicked"
                                         BackgroundColor="#FFFFFF"
                                         TextColor="#0D47A1"
                                         BorderColor="#0D47A1"
@@ -401,3 +411,56 @@
     </Grid>
 
 </ContentPage>
+
+-------------------------------------------------------------------------------
+
+ protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        var allLines = await _db.GetTransportLinesAsync();
+
+        // Metro hatları
+        MetroCollection.ItemsSource = allLines
+            .Where(l => l.Type == "Metro")
+            .ToList();
+
+        // Tramvay + Otobüs (ikon eşleştirmesiyle)
+        var surfaceLines = allLines
+            .Where(l => l.Type == "Tramvay" || l.Type == "Otobüs")
+            .Select(l => new
+            {
+                l.LineName,
+                l.Route,
+                l.ColorHex,
+                IconGlyph = l.Type == "Tramvay" ? "\ue571" : "\ue530"
+            })
+            .ToList();
+
+        SurfaceCollection.ItemsSource = surfaceLines;
+    }
+
+    private async void OnHomeTapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("//home");
+    }
+
+    private async void OnDiscoverTapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("//discover");
+    }
+
+    private async void OnEventsTapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("//events");
+    }
+
+
+-------------------------------------------------------------------------------
+
+https://www.malpensaexpress.it/en/travel-documents/tickets/
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
