@@ -419,6 +419,17 @@ public class FoodFilterItem
     }
 
 ---------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO FoodPlaces (Name, District, CuisineType, PriceRange, Rating, ImageUrl) VALUES
+('Cracco in Galleria', 'Brera District', 'Fine Dining', '€€€€', 4.9, 'milano_001.jpg'),
+('Berberè Navigli', 'Navigli', 'Pizza', '€€', 4.7, 'milano_002.jpg'),
+('Terrazza Aperol', 'Centro Storico', 'Aperitivo', '€€€', 4.5, 'milano_003.jpg'),
+('Trattoria Masuelli', 'Porta Romana', 'Pasta', '€€', 4.5, 'milano_004.jpg'),
+('Gelateria Marghera', 'Wagner', 'Gelato', '€', 4.7, 'milano_005.jpg'),
+('Ristorante Berton', 'Porta Nuova', 'Fine Dining', '€€€€', 4.7, 'milano_006.jpg'),
+('Pave Milano', 'Porta Venezia', 'Gelato', '€€', 4.5, 'milano_007.jpg');
+
+
 ---------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------

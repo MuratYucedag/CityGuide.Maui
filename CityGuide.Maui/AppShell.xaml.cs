@@ -10,6 +10,8 @@
             Routing.RegisterRoute("routes", typeof(Views.RoutesPage));
             Routing.RegisterRoute("profile", typeof(Views.ProfilePage));
             Routing.RegisterRoute("fooddrinks", typeof(Views.FoodDrinksPage));
+            Routing.RegisterRoute("cultures", typeof(Views.CulturePage));
+            Routing.RegisterRoute("favorites", typeof(Views.FavoritesPage));
         }
 
     }

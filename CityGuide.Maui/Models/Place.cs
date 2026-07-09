@@ -22,6 +22,22 @@ namespace CityGuide.Maui.Models
         public double Score { get; set; }
         public string Location { get; set; } = string.Empty;
 
+        // --- Yeni alanlar (Detay sayfası için) ---
+
+        public string Description { get; set; } = string.Empty;     // uzun açıklama (2 paragraf birleşik olabilir)
+
+        public string Duration { get; set; } = string.Empty;        // "2 - 3 Saat"
+
+        public string PriceInfo { get; set; } = string.Empty;       // "€10,00'dan başlayan fiyatlarla"
+
+        public string ReviewCount { get; set; } = string.Empty;     // "12b Değerlendirme" (serbest metin)
+
+        public string Address { get; set; } = string.Empty;         // "Piazza del Duomo, 20122 Milano MI"
+
+        public string MapImageUrl { get; set; } = string.Empty;     // mini harita görseli
+
+        public string TicketUrl { get; set; } = string.Empty;       // gerçek bilet sitesi linki
+
         [Ignore]
         public bool IsFavorite { get; set; }
 

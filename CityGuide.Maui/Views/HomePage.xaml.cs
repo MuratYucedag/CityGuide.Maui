@@ -26,9 +26,9 @@ public partial class HomePage : ContentPage
         await DisplayAlert("Keþfet", "Detay sayfasý yakýnda eklenecek.", "Tamam");
     }
 
-    private async void OnEventsClicked(object sender, TappedEventArgs e)
+    private async void OnFavoritesClicked(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("//main/Etkinlikler");
+        await Shell.Current.GoToAsync("//discover");
     }
 
     private async void OnDiscoverTapped(object sender, TappedEventArgs e)
@@ -44,5 +44,15 @@ public partial class HomePage : ContentPage
     private async void OnProfileTapped(object sender, TappedEventArgs e)
     {
         await Shell.Current.GoToAsync("profile");
+    }
+
+    private async void OnFoodDrinksClicked(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("fooddrinks");
+    }
+
+    private async void OnCultereClicked(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("cultures");
     }
 }
