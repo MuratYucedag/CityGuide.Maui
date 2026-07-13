@@ -55,4 +55,9 @@ public partial class HomePage : ContentPage
     {
         await Shell.Current.GoToAsync("cultures");
     }
+
+    private async void OnDashboardClicked(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("dashboard");
+    }
 }

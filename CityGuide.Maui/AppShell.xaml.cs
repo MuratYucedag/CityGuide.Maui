@@ -12,6 +12,8 @@
             Routing.RegisterRoute("fooddrinks", typeof(Views.FoodDrinksPage));
             Routing.RegisterRoute("cultures", typeof(Views.CulturePage));
             Routing.RegisterRoute("favorites", typeof(Views.FavoritesPage));
+            Routing.RegisterRoute("placedetail", typeof(Views.PlaceDetailPage));
+            Routing.RegisterRoute("dashboard", typeof(Views.DashboardPage));
         }
 
     }
